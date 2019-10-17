@@ -21,7 +21,7 @@ class home extends Component {
   }
 
   showData = (items) => {
-    return items.slice(0, 5).map(item => <ItemDetails item={item} />)
+    return items.slice(0, 5).map(item => <ItemDetails key={item.postId} item={item} />)
   }
 
   render() {

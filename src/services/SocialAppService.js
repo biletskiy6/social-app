@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 class SocialAppService {
-    _apiBase = "https://jsonplaceholder.typicode.com";
+    _apiBase = "http://localhost:5000/social-app-a755b/europe-west1/api";
 
     getResource = async (url) => {
         const response = await axios.get(`${this._apiBase}${url}`);
