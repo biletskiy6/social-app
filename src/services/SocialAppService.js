@@ -11,9 +11,24 @@ class SocialAppService {
         }
         return response.data;
     }
+    postRequest = async (url, data) => {
+        return axios.post(`${this._apiBase}${url}`, data);
+    }
 
     getPosts = async () => {
         return this.getResource("/posts");
+    }
+
+    userLogin = (data) => {
+        return this.postRequest('/login', data);
+    };
+
+    userSignup = (data) => {
+        return this.postRequest('/signup', data);
+    };
+
+    getUserData = () => {
+        return this.getResource('/user');
     }
 
 }

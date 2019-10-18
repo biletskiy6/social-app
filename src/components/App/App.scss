@@ -15,6 +15,7 @@ body {
 .container {
   max-width: 1170px;
   margin: 0 auto;
+  padding: 0 15px;
 }
 
 .home {
@@ -24,4 +25,46 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.user-container {
+  padding-top: 30px;
+
+  form {
+    max-width: 45%;
+    margin: 0 auto;
+
+    .form-field {
+      margin-bottom: 10px;
+    }
+  }
+  .form-controls {
+    display: flex;
+    margin-top: 20px;
+  
+    button {
+      flex: 1;
+      &:nth-child(1) {
+        margin-right: 50px;
+      }
+    }
+  }
+  small {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    transition: color .35s ease;
+    a {
+      &:hover {
+        color: #00a152;
+        transition: color .35s ease;
+      }
+    }
+  }
+}
+
+.logo {
+  display: block;
+  width: 60px;
+  margin: 0 auto 20px auto;
 }
