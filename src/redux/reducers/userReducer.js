@@ -1,4 +1,4 @@
-import { LOADING_UI, STOP_LOADING_UI, SET_ERRORS, SET_USER, SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOGOUT_USER } from "../types";
+import { LOADING_UI, STOP_LOADING_UI, SET_ERRORS, SET_USER, SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOGOUT_USER, LOADING_USER, STOP_LOADING_USER } from "../types";
 import axios from "axios";
 
 const initialState = {
@@ -27,10 +27,23 @@ export default function (state = initialState, action) {
                 ...action.payload
             }
         }
-        case LOGOUT_USER: {
-            localStorage.removeItem("FDIdToken");
-            delete axios.defaults.headers.common['Authorization'];
 
+        case LOADING_USER: {
+            return {
+                ...state,
+                loading: true
+            }
+        }
+        case STOP_LOADING_USER: {
+            return {
+                ...state,
+                loading: false
+            }
+        }
+
+        case LOGOUT_USER: {
+            localStorage.removeItem("FBIdToken");
+            delete axios.defaults.headers.common['Authorization'];
         }
         default:
             return state;

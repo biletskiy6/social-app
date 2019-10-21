@@ -1,7 +1,6 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form';
 import AppLogo from '../assets/images/twitter.svg';
-
 import { Link } from 'react-router-dom';
 import SocialAppContext from '../components/SocialAppContext/SocialAppContext';
 import axios from 'axios';
@@ -9,7 +8,7 @@ import axios from 'axios';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Button } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 //Redux Stuff
 import * as  UIActions from '../redux/actions/uiActions';
 import * as UserActions from '../redux/actions/userActions';
@@ -82,19 +81,19 @@ class LoginPage extends React.Component {
   static contextType = SocialAppContext;
   submit = values => {
     const { userLogin, getUserData } = this.context;
-    const { loadingUI, setErrors, stopLoadingUI, clearErrors, getAuthenticatedUserData } = this.props;
+    const { loadingUI, setErrors, stopLoadingUI, clearErrors, getAuthenticatedUserData, loadingUser } = this.props;
     loadingUI();
     userLogin(values)
       .then((res) => {
         stopLoadingUI();
-
+        loadingUser();
         const FBIdToken = `Bearer ${res.data.token}`;
         localStorage.setItem('FBIdToken', FBIdToken);
         axios.defaults.headers.common['Authorization'] = FBIdToken;
 
-        getUserData().then(res => {
-          getAuthenticatedUserData(res);
-        })
+        // getUserData().then(res => {
+        //   getAuthenticatedUserData(res);
+        // })
         clearErrors();
         this.props.history.push('/');
       })

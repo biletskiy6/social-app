@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Grid from '@material-ui/core/Grid';
 import SocialAppContext from '../components/SocialAppContext/SocialAppContext';
 import ItemDetails from "../components/ItemDetails";
+import Profile from "../components/Profile/Profile";
 
 
 class home extends Component {
@@ -34,7 +35,7 @@ class home extends Component {
             {itemsMarkup}
           </Grid>
           <Grid item sm={4} xs={12}>
-            <h2>Profile</h2>
+            <Profile />
           </Grid>
         </Grid>
       </div>

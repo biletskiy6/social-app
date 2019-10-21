@@ -29,6 +29,11 @@ a {
 
 .user-container {
   padding-top: 30px;
+  &.edit-details-form {
+    form {
+      max-width: 100%;
+    }
+  }
 
   form {
     max-width: 45%;
