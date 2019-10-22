@@ -10,3 +10,8 @@ export const LOADING_UI = 'LOADING UI'
 export const STOP_LOADING_UI = 'STOP_LOADING UI'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
 export const LOGOUT_USER = 'LOGOUT_USER';
+//Data reducer types
+export const SET_POSTS = 'SET_POSTS'
+export const LOADING_DATA = 'LOADING_DATA'
+export const LIKE_POST = 'LIKE_POST'
+export const UNLIKE_POST = 'UNLIKE_POST'
