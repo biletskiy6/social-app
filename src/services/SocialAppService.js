@@ -3,7 +3,7 @@ import axios from 'axios';
 
 class SocialAppService {
     _apiBase = "http://localhost:5000/social-app-a755b/europe-west1/api";
-    _token = localStorage.getItem("FBIdToken") ? localStorage.getItem("FBIdToken") : null
+
     getResource = async (url) => {
         const response = await axios.get(`${this._apiBase}${url}`);
         if (response.status !== 200) {
@@ -28,9 +28,6 @@ class SocialAppService {
     };
 
     getUserData = () => {
-        if (this._token) {
-            axios.defaults.headers.common['Authorization'] = this._token;
-        }
         return this.getResource('/user');
     }
 
@@ -40,6 +37,14 @@ class SocialAppService {
 
     updateUserData = (data) => {
         return this.postRequest('/user', data);
+    }
+
+    likePost = (postId) => {
+        return this.getResource(`/post/${postId}/like`);
+    }
+
+    unlikePost = (postId) => {
+        return this.getResource(`/post/${postId}/unlike`);
     }
 
 }

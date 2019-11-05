@@ -23,52 +23,57 @@ import * as UserActions from '../../redux/actions/userActions';
 import ImageLoader from 'react-load-image';
 import EditDetails from '../EditDetails';
 
+import axios from 'axios';
 
 
-const styles = {
-    paper: {
-        padding: 20
-    },
-    profile: {
-        '& .image-wrapper': {
-            textAlign: 'center',
-            position: 'relative',
-            '& button': {
-                position: 'absolute',
-                top: '80%',
-                left: '70%'
-            }
+
+const styles = (theme) => {
+    return {
+        progress: theme.progress,
+        paper: {
+            padding: 20
         },
-        '& .profile-image': {
-            width: 200,
-            height: 200,
-            objectFit: 'cover',
-            maxWidth: '100%',
-            borderRadius: '50%'
-        },
-        '& .profile-details': {
-            textAlign: 'center',
-            '& span, svg': {
-                verticalAlign: 'middle'
+        profile: {
+            '& .image-wrapper': {
+                textAlign: 'center',
+                position: 'relative',
+                '& button': {
+                    position: 'absolute',
+                    top: '80%',
+                    left: '70%'
+                }
             },
+            '& .profile-image': {
+                width: 200,
+                height: 200,
+                objectFit: 'cover',
+                maxWidth: '100%',
+                borderRadius: '50%'
+            },
+            '& .profile-details': {
+                textAlign: 'center',
+                '& span, svg': {
+                    verticalAlign: 'middle'
+                },
+                '& a': {
+                    color: '#00A152'
+                }
+            },
+            '& hr': {
+                border: 'none',
+                margin: '0 0 10px 0'
+            },
+            '& svg.button': {
+                '&:hover': {
+                    cursor: 'pointer'
+                }
+            }
+        },
+        buttons: {
+            textAlign: 'center',
             '& a': {
-                color: '#00A152'
+                margin: '20px 10px'
             }
-        },
-        '& hr': {
-            border: 'none',
-            margin: '0 0 10px 0'
-        },
-        '& svg.button': {
-            '&:hover': {
-                cursor: 'pointer'
-            }
-        }
-    },
-    buttons: {
-        textAlign: 'center',
-        '& a': {
-            margin: '20px 10px'
         }
     }
 }
@@ -78,14 +83,18 @@ class Profile extends Component {
     static contextType = SocialAppContext;
 
     componentDidMount() {
-        console.log(123);
+
         const { getUserData } = this.context;
         const { getAuthenticatedUserData, loadingUser } = this.props;
         const token = localStorage.getItem("FBIdToken");
         if (token) {
+            axios.defaults.headers.common['Authorization'] = token;
             loadingUser();
             getUserData()
-                .then(res => { getAuthenticatedUserData(res) })
+                .then(res => {
+                    console.log(res);
+                    getAuthenticatedUserData(res)
+                })
                 .catch(err => console.log(err))
         }
     }
@@ -110,7 +119,6 @@ class Profile extends Component {
         formData.append('image', image, image.name);
         this.props.loadingUser();
         this.uploadImage(formData)
-
     }
 
     handleEditPicture = () => {
@@ -185,7 +193,7 @@ class Profile extends Component {
                         <Button variant="contained" color="secondary" component={Link} to="/signup">Signup</Button>
                     </div>
                 </Paper>
-            )) : (<p>Loading..</p>)
+            )) : (<CircularProgress className={classes.progress} size={20} />)
 
         return profileMarkup;
     }
@@ -197,9 +205,5 @@ const mapStateToProps = ({ user }) => {
 
 const mapDispatchToProps = { ...UserActions }
 
-Promise.propTypes = {
-    user: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired,
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Profile));

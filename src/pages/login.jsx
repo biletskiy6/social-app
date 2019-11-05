@@ -86,12 +86,12 @@ class LoginPage extends React.Component {
     userLogin(values)
       .then((res) => {
         stopLoadingUI();
-        loadingUser();
         const FBIdToken = `Bearer ${res.data.token}`;
         localStorage.setItem('FBIdToken', FBIdToken);
         axios.defaults.headers.common['Authorization'] = FBIdToken;
 
         // getUserData().then(res => {
+        //   loadingUser();
         //   getAuthenticatedUserData(res);
         // })
         clearErrors();

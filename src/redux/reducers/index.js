@@ -9,5 +9,6 @@ import userReducer from './userReducer';
 export default combineReducers({
     user: userReducer,
     UI: uiReducer,
+    data: dataReducer,
     form
 });

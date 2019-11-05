@@ -1,0 +1,13 @@
+.align-counters {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  button {
+      padding: 0;
+      margin-right: 7px;
+  }
+  &--likes {
+    margin-right: 20px;
+  }
+}
